@@ -14,12 +14,12 @@ import java.util.List;
 public class Pdf_adapter extends RecyclerView.Adapter<Pdf_view_holder> {
     private Context context;
     private List<File> Pdf_File;
-    private OnPdfFileSelectListenrt onPdfFileSelectListenrt;
+    private OnPdfFileSelectListenrt listener;
 
-    public Pdf_adapter(Context context, List<File> pdf_File, OnPdfFileSelectListenrt onPdfFileSelectListenrt) {
+    public Pdf_adapter(Context context, List<File> pdf_File, OnPdfFileSelectListenrt listener) {
         this.context = context;
         this.Pdf_File = pdf_File;
-        this.onPdfFileSelectListenrt = onPdfFileSelectListenrt;
+        this.listener = listener;
     }
 
     @NonNull
@@ -35,7 +35,7 @@ public class Pdf_adapter extends RecyclerView.Adapter<Pdf_view_holder> {
         holder.Container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             onPdfFileSelectListenrt.OnPdfSelectedListener(Pdf_File.get(position));
+                listener.OnPdfSelectedListener(Pdf_File.get(position));
             }
         });
     }
