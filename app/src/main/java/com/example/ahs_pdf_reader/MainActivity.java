@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.karumi.dexter.Dexter;
@@ -74,16 +75,22 @@ public class MainActivity extends AppCompatActivity implements OnPdfFileSelectLi
 
     public ArrayList<File> Find_Pdf(File file) {
         ArrayList<File> arrayList = new ArrayList<>();
-        File[] files = file.listFiles();
-        for (File SingleFile : files) {
-            if (SingleFile.isDirectory() && !SingleFile.isHidden()) {
-                arrayList.addAll(Find_Pdf(SingleFile));
-            } else {
-                if (SingleFile.getName().endsWith(".pdf")) {
-                    arrayList.add(SingleFile);
+
+        try {
+            File[] files = file.listFiles();
+            for (File SingleFile : files) {
+                if (SingleFile.isDirectory() && !SingleFile.isHidden()) {
+                    arrayList.addAll(Find_Pdf(SingleFile));
+                } else {
+                    if (SingleFile.getName().endsWith(".pdf")) {
+                        arrayList.add(SingleFile);
+                    }
                 }
             }
+        }catch (Exception e){
+            Log.e("Error:", e.toString());
         }
+
         return arrayList;
     }
 
